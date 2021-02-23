@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+
+
+<body class="hold-transition register-page"> 
+
+<ui:composition template="index.xhtml"> 
+
+	<ui:define name="LeftMenuActivo">
+	<a href="producto_registro.xhtml" class="nav-link active">
+	<i class="nav-icon far fa-file-alt"></i>
+      <p>
+        Productos
+      </p>
+    </a>
+	</ui:define>
+
+	<ui:define name="Titulo">
+	    <b>Registro</b> Producto
+	</ui:define>
+
+	
+ <ui:define name="Registro"> 	 
+   <div class=""> <!-- class="register-box" -->
+  <div class="card">
+    <div class="card-body register-card-body">
+<!--     <p class="login-box-msg">Registrar un nuevo Cliente</p> -->
+    
+	  
+      <h:form > <!-- action="index.html" method="post" -->
+      <div class="row"> 
+<!--       col izquierda -->
+      <div class="col-md-4">
+      	<div class="input-group mb-3">
+          <h:inputText type="text" class="form-control" a:placeholder="Codigo" value="#{productoControllerBEAN.newProducto.proCodigo}" />
+<!--           <input type="text" class="form-control" placeholder="Nombre" value="#{registroControllerBEAN.newCliente.cliNombre}"/> -->
+            <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <h:inputText type="text" class="form-control" a:placeholder="Descripcion" value="#{productoControllerBEAN.newProducto.proDescripcion}" />
+<!--           <input type="text" class="form-control" placeholder="Nombre" value="#{registroControllerBEAN.newCliente.cliNombre}"/> -->
+            <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        
+      </div>  
+    
+<!--        col derecha -->
+	 <div class="col-md-4">
+	       
+	  	<div class="input-group mb-3">
+             <H4>.</H4>
+        </div>
+        <div class="input-group mb-3">
+          <h:inputText type="text" class="form-control" a:placeholder="Precio Unitario" value="#{productoControllerBEAN.newProducto.proPreciounit}" />
+            <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        
+        
+       
+        <!--    init     -->
+		 
+		 
+<!--    fin      -->
+     </div>
+        
+        </div>
+        
+        <div class="row">
+          <div class="col-5">
+          	
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <h:commandButton class="btn btn-primary btn-block" action="#{registroControllerBEAN.registrarCliente()}" value="Guardar"> 
+            </h:commandButton> 
+          </div>
+          <!-- /.col -->
+        </div>
+        
+      </h:form>
+     
+    </div>
+    
+    
+    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div>
+<!-- /.register-box -->
+
+
+
+ 
+ </ui:define>
+ </ui:composition> 
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pm="http://primefaces.org/mobile">
+
+  <h:head>
+    <h:outputStylesheet
+      library="webjars"
+      
+      name="font-awesome/5.13.0/css/all-jsf.css"/>
+
+   
+  </h:head>	
+
+<body class="hold-transition register-page">
+	<ui:composition template="index.xhtml">
+	
+		<ui:define name="LeftMenuPerListar">
+<!-- 		<a href="persona_listar.xhtml" class="nav-link active"> -->
+		</ui:define>
+	
+		
+		
+		<!-- 	Barra Menu Principal -->
+		<ui:define name="Menu-bar">
+			<li class="nav-item d-sm-inline-block ml-3"><a
+				href="index3.html" class="badge badge-danger"><i
+					class="fas fa-bars">New</i></a></li>
+			<li class="nav-item  d-sm-inline-block ml-3"><a href="#"
+				class="badge badge-warning">Edit</a></li>
+		</ui:define>
+		<!-- SEARCH FORM -->
+		<ui:define name="Barra-search">
+			<form class="form-inline ml-3">
+				<div class="input-group input-group-sm">
+					<input class="form-control form-control-navbar" type="search"
+						placeholder="Search" aria-label="Search" />
+					<div class="input-group-append">
+						<button class="btn btn-navbar" type="submit">
+							<i class="fas fa-search"></i>
+						</button>
+					</div>
+				</div>
+			</form>
+		</ui:define>
+		<!-- 	Titulo Card Formulario -->
+		<ui:define name="Titulo">
+			<b>Listar</b> Cliente
+	</ui:define>
+
+		<!-- 	Formulario Registro Personas -->
+		<ui:define name="Registro">
+			<div class="">
+				<!--     class="register-box" -->
+				<div class="card">
+					<div class="card-body register-card-body">
+						<!--     <p class="login-box-msg">Registrar un nuevo Cliente</p> -->
+
+						<h:form>
+							<!-- action="index.html" method="post" -->
+							<div class="row">
+								  
+								  
+<!-- 								  inicio -->
+
+        		
+      	
+				 <h:dataTable  value="#{personaControllerBEAN._newListPersona}" var="listadoPersona" class="table table-bordered table-striped">
+					<h:column>
+						<f:facet name="header">id</f:facet>
+						#{listadoPersona.perId}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Cedula</f:facet>
+						#{listadoPersona.perCedula}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Nombre</f:facet>
+						#{listadoPersona.perNombre}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Apellido</f:facet>
+						#{listadoPersona.perApellido}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Dire</f:facet>
+						#{listadoPersona.perDireccion}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Editar</f:facet>
+              			<h:commandButton class="btn btn-success" value="Edit" action="#{personaControllerBEAN.editarCliente(listadoPersona.perId)}" a:data-toggle="modal"  a:data-target="#juanin">
+                      	 	<f:ajax render="editarUsuario"/>
+              			</h:commandButton>
+					</h:column>
+				</h:dataTable>
+				
+                
+                <div class="modal fade" id="juanin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">EDITAR TRABAJADOR</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" name="modal">
+                            <div class="row">
+                                <div class="card card-body">
+                                    <h:form id="editarUsuario"><br></br>
+                                        <h5 class="card-title bg-white">EDICION DE Jusn</h5>
+                                        <div class="form-group">
+                                            <label class="text-center" for="cedula">Cedula</label>
+                                            <h:inputText class="form-control" id="cedula"  value="#{personaControllerBEAN.newPersona.perCedula}"/>
+                                        </div>
+                                       
+                                        <div class="form-group">
+                                            <label class="text-center" for="sueldo">Direccion</label>
+                                            <h:inputText class="form-control" id="sueldo" value="#{personaControllerBEAN.newPersona.perDireccion}"/>
+                                        </div>
+                                        <br/>
+                                        <h:commandButton class=" btn btn-success btn-block" value="ACTUALIZAR" action="#">
+                                            <f:ajax render="@all" execute="editarUsuario"/>
+                                        </h:commandButton>
+                                    </h:form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+                
+                   
+                   
+                   
+			</div>
+							<div class="row">
+								<div class="col-5"></div>
+								<!-- /.col -->
+								<div class="col-4">
+									<h:commandButton class="btn bg-gradient-info" action="#{personaControllerBEAN.registrarCliente()}" value="Guardar">
+									<i class="fas fa-search"></i>
+									</h:commandButton>
+									<h:commandButton class="btn btn-default float-right" action="{}" value="Cancelar">
+									</h:commandButton>
+								</div>
+								<!-- /.col -->
+							</div>
+
+						</h:form>
+
+					</div>
+					<!-- /.form-box -->
+				</div>
+				<!-- /.card -->
+			</div>
+			<!-- /.register-box -->
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

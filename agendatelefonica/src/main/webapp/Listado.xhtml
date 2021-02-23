@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      
+<ui:composition template="template/template.xhtml">
+<ui:define name="title">Lista Contacto</ui:define>
+
+<h:head>
+	
+</h:head> 
+
+<h1>Registro</h1>
+
+<ui:define name="content">
+
+<h:dataTable value="#{contactosControlerBEAN._listPer}" var="listadoPersona" class="table">
+	<h:column>
+		<f:facet name="header">Nombre</f:facet>
+		#{listadoPersona.nombre}
+	</h:column>
+	<h:column>
+		<f:facet name="header">Cedula</f:facet>
+		#{listadoPersona.cedula}
+	</h:column>
+	<h:column>
+		<f:facet name="header">Numero Telefono</f:facet>
+		#{listadoPersona.listaTelefonos.get(0).numeros}
+	</h:column>
+	
+	
+		<h:column>
+			#{listadoPersona.listaTelefonos.get(1).numeros}
+		</h:column>
+
+	
+</h:dataTable>
+</ui:define>
+</ui:composition>
+
+</html>
