@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Login</title>
+	<link href="#{appBean.baseUrl}resources/css/login.css" type="text/css"
+		rel="stylesheet" />
+</h:head>
+<h:body>
+	<div class="login">
+		<p:growl id="growl" sticky="true" showDetail="true" life="3000" />		
+		
+		<h:form id="formLogin">
+		<p:messages id="msg" />
+			<p:panel id="basic" header="Login" style="margin-bottom:20px">
+				<h:panelGrid columns="3" cellpadding="10">
+					<h:panelGrid columns="3" cellpadding="5">
+						<h:outputLabel for="usuUsuario" value="Usuario" />
+						<p:inputText id="usuUsuario" value="#{loginBean.usuarios.usLogin}" placeholder="Usuario" required="true" requiredMessage="Ingrese su nombre de usuario"
+							label="Usuario" />
+						<p:message for="usuUsuario" display="icon" />
+						<h:outputLabel for="usuPassword" value="Contraseña" />
+						<p:password id="usuPassword" value="#{loginBean.usuarios.usPassword}" placeholder="Contraseña" required="true" requiredMessage="Ingrese una contraseña"
+							label="Contraseña" />
+						<p:message for="usuPassword" display="icon" />
+						<f:facet name="footer">
+							<p:commandButton value="Ingresar" update=":formLogin"
+								actionListener="#{loginBean.login(actionEvent)}"
+								oncomplete="handleLoginRequest(xhr, status, args)" icon="ui-icon-key" />
+						</f:facet>
+					</h:panelGrid>
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+	</div>
+
+	<script type="text/javascript">
+        function handleLoginRequest(xhr, status, args) {
+            if (args.validationFailed || !args.loggedIn) {
+                jQuery('#formLogin').effect("shake", {times: 5}, 1000);
+            }
+            else {
+                location.href = args.ruta;
+            }
+        }
+     </script>
+</h:body>
+</html>

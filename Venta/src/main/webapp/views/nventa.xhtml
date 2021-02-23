@@ -1,0 +1,93 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<f:loadBundle basename="com.jonathan.msgs.message" var="msgs" />
+
+<h:body>
+	<ui:composition template="/views/template.xhtml">
+		<ui:define name="content">
+			<div class="conteiner">
+				<h:form id="formVenta">
+					<p:growl id="messages" showDetail="true" autoUpdate="true"/>
+					<p:fieldset legend="#{msgs.nventa}" style="margin-bottom:20px">
+					<p:commandButton id="btnProducto" value="#{msgs.bproducto}" type="button" onclick="PF('prodmadDialog').show()" icon="ui-icon-search" />
+					</p:fieldset>
+					<p:fieldset id="dventa" legend="#{msgs.dventa}" style="margin-bottom:20px">
+					<p:dataTable id="detalleVenta" var="detalles"
+						value="#{ventaBean.detalleVentas}" rowIndexVar="row" editable="true"
+						editMode="cell" widgetVar="cellCars" rendered="true"
+						style="width: 800px">
+						<p:ajax event="cellEdit" listener="#{ventaBean.onCellEdit}" update="detalleVenta" />
+						<p:column headerText="#{msgs.tid}" width="5">
+							<h:outputText value="#{detalles.producto.prodId}" />
+						</p:column>	
+						<p:column headerText="#{msgs.tnombre}" width="5">
+							<h:outputText value="#{detalles.producto.prodNombre}" />
+						</p:column>
+						<p:column headerText="#{msgs.tcantidad}" width="5">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{detalles.dvCantidad}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{detalles.dvCantidad}" style="width:90%" label="Cant">
+								</p:inputText>
+							</f:facet>
+						</p:cellEditor>
+						</p:column>
+						<p:column headerText="#{msgs.tprecio}" width="5">
+							<h:outputText value="#{detalles.producto.prodPrecio}" />
+						</p:column>
+						<p:column headerText="#{msgs.ttotal}" width="5">
+							<h:outputText value="#{detalles.dvTotal}" />
+						</p:column>
+						<p:column style="width:10px;text-align: center" headerText="Accion">
+							<p:commandLink update=":formVenta" title="#{msgs.bquitar}"
+								action="#{ventaBean.quitar(detalles)}" >
+								<p:graphicImage name="/img/delete.png" />
+								<f:setPropertyActionListener value="#{detalles}"
+									target="#{ventaBean.detalleVenta}" />
+							</p:commandLink>
+						</p:column>
+					</p:dataTable>
+					<br />
+					<br />
+					<h:panelGrid columns="4" cellpadding="5">
+						<h:outputText value="#{msgs.ttotal} :" />
+						<p:inputText value="#{ventaBean.venta.venMonto}" />
+						<h:outputText value=" " />
+						<p:commandButton value="#{msgs.bgrabar}" icon="ui-icon-disk" actionListener="#{ventaBean.btnCreate(actionEvent)}" update="formVenta" action="nventa?faces-redirect=true"/>
+					</h:panelGrid>
+					</p:fieldset>
+					<p:dialog header="#{msgs.pproductos}" widgetVar="prodmadDialog" resizable="false" width="800">
+					<p:dataTable id="productos" var="producto" value="#{ventaBean.productos}" 
+					tableStyle="table-layout: auto;" widgetVar="producto"
+					rows="5" paginator="true" paginatorPosition="bottom"
+					rowsPerPageTemplate="5,10,15" selectionMode="single"
+					selection="#{ventaBean.producto}"
+					rowKey="#{producto.prodId}">
+					
+					<p:ajax event="rowSelect"
+						listener="#{ventaBean.onRowSelectForm}" update=":formVenta" />
+					<p:ajax event="rowUnselect"
+						listener="#{ventaBean.onRowUnSelectForm}" />
+					
+						<p:column headerText="#{msgs.tid}">
+							<h:outputText value="#{producto.prodId}" />
+						</p:column>
+						<p:column headerText="#{msgs.tnombre}">
+							<h:outputText value="#{producto.prodNombre}" />
+						</p:column>
+						<p:column headerText="#{msgs.tprecio}">
+							<h:outputText value="#{producto.prodPrecio}" />
+						</p:column>
+					</p:dataTable>
+					</p:dialog>
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

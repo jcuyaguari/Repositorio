@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+</h:head>
+<h:body>
+
+<h:form>
+			<h:dataTable id="tablabusqueda" value="#{ferreteriaBeanController.listaproducto}" var="item">
+				<h:column>
+					<f:facet name="header">nombre</f:facet>
+				 	<label > #{item.proId} </label>
+				</h:column>
+				<h:column>
+					<f:facet name="header">nombre</f:facet>
+				 	<label > #{item.proNombre} </label>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Stock</f:facet>
+					 <label > #{item.proStock} </label>
+				</h:column>
+				<h:column>
+					<f:facet name="header">proveedor</f:facet>
+					 <label> #{item.provId.provNombre} </label>
+				</h:column>
+				
+				<h:column>
+					<h:commandButton action="#{ferreteriaBeanController.hola()}" value="Pedir" id="iddetalles"/>
+				</h:column>
+			</h:dataTable>
+		</h:form>
+
+
+</h:body>
+</html>
+

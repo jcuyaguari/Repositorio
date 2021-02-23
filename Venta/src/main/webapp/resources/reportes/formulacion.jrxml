@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2015-12-22T21:52:17 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="formulacion" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8fbcec8a-8e13-47f6-b544-db9efd442702">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="3"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL_Resindesa"/>
+	<parameter name="idF" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+formulacion.formId,
+formulacion.formProducto,
+producto.prodNombre,
+formulacion.formFecha,
+detalleformulacion.dfInsumo,
+detalleformulacion.dfInsumonombre,
+detalleformulacion.dfPorcentaje
+
+FROM
+producto
+INNER JOIN formulacion ON formulacion.formProducto = producto.proIdd
+INNER JOIN detalleformulacion ON detalleformulacion.dfformulacion = formulacion.formId
+WHERE
+formulacion.formId = $P{idF}]]>
+	</queryString>
+	<field name="formId" class="java.lang.String"/>
+	<field name="formProducto" class="java.lang.String"/>
+	<field name="prodNombre" class="java.lang.String"/>
+	<field name="formFecha" class="java.sql.Timestamp"/>
+	<field name="dfInsumo" class="java.lang.String"/>
+	<field name="dfInsumonombre" class="java.lang.String"/>
+	<field name="dfPorcentaje" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="31" uuid="897ca7a3-132a-4b2c-b574-3275ea30a087"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FICHA DE FORMULACION]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="112" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="9" y="2" width="212" height="60" uuid="c760f397-164e-4802-8905-d5e80a4358a3"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="21" y="11" width="77" height="20" uuid="785b4baa-c729-4a53-8907-762f4b4d9869"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[N° Formulación :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="109" y="11" width="89" height="20" uuid="f47e0a6d-5634-4dbd-ae05-b9c3b3db0684"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{formId}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="21" y="31" width="76" height="20" uuid="f9afb9fa-4cd4-469b-a877-f8419d1dd06d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Fecha :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="109" y="31" width="89" height="20" uuid="bdf7f704-5cf1-4709-859b-ddb4786eef53"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{formFecha}]]></textFieldExpression>
+			</textField>
+			<rectangle radius="10">
+				<reportElement x="9" y="68" width="534" height="41" uuid="b87a7d70-0045-4633-9156-7dca3279034c"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="21" y="77" width="58" height="20" uuid="87ce9ded-975e-4f8a-88b1-32eeed247ff5"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[PRODUCTO :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="97" y="77" width="287" height="20" uuid="a5013db1-3d3f-4142-a3e9-ca133040cacc"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{prodNombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="418" y="77" width="33" height="20" uuid="f2340d6d-bcff-42cc-b2d5-df70acf44bd9"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[ID :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="451" y="77" width="80" height="20" uuid="bcb530a6-9c38-467a-887f-39e6f6a34d5d"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{formProducto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="21" y="0" width="86" height="20" uuid="f4acd976-2bd9-406f-af27-c19e8c76ce60"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Insumo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="441" y="0" width="100" height="20" uuid="c7fa7b30-99d5-4b0b-920b-5ac71b8436da"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Porcentaje]]></text>
+			</staticText>
+			<line>
+				<reportElement x="9" y="21" width="536" height="1" uuid="04398732-b99b-4f95-90bc-bb69c2056d2b"/>
+			</line>
+			<staticText>
+				<reportElement x="133" y="0" width="265" height="20" uuid="6a75e134-4608-4d0b-85bb-3081696735ea"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="21" y="2" width="88" height="20" uuid="6b1f4b05-ea67-4f76-8c69-56b6d008e3af"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dfInsumo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="2" width="265" height="20" uuid="e5b729d5-4419-4858-a68b-51d453526baf"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dfInsumonombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="441" y="2" width="100" height="20" uuid="98a1ebf3-e3a1-4b00-b4d0-ebfa624c099f"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dfPorcentaje}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="44" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
